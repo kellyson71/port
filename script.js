@@ -115,4 +115,136 @@ document.addEventListener("DOMContentLoaded", function () {
     .forEach((el) => {
       metricsObserver.observe(el);
     });
+
+  fetchGitHubData();
 });
+
+// Função para buscar dados do GitHub
+async function fetchGitHubData() {
+  const username = "kellyson71";
+  try {
+    // Buscar dados do perfil
+    const profileResponse = await fetch(
+      `https://api.github.com/users/${username}`
+    );
+    const profile = await profileResponse.json();
+
+    // Buscar repositórios
+    const reposResponse = await fetch(
+      `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`
+    );
+    const repos = await reposResponse.json();
+
+    updateGitHubSection(profile, repos);
+  } catch (error) {
+    console.error("Erro ao buscar dados do GitHub:", error);
+  }
+}
+
+function updateGitHubSection(profile, repos) {
+  const githubContainerEl = document.querySelector(".github-container");
+
+  // Atualizar perfil e contribuições
+  const overviewHtml = `
+    <div class="github-overview">
+      <div class="github-profile">
+        <img src="${profile.avatar_url}" alt="Profile" class="github-avatar">
+        <div class="github-info">
+          <h3>${profile.name || profile.login}</h3>
+          <p>${profile.bio || "Desenvolvedor Full Stack"}</p>
+          <div class="github-stats">
+            <span><i class="fas fa-code-branch"></i> ${
+              profile.public_repos
+            } repos</span>
+            <span><i class="fas fa-users"></i> ${
+              profile.followers
+            } seguidores</span>
+            <span><i class="fas fa-star"></i> ${
+              profile.public_gists
+            } gists</span>
+          </div>
+        </div>
+      </div>
+      <div class="contribution-card">
+        <h4>Contribuições</h4>
+        <img 
+          src="https://ghchart.rshah.org/${profile.login}" 
+          alt="Contribution Graph"
+          class="contribution-graph"
+        >
+      </div>
+    </div>
+  `;
+
+  // Atualizar lista de repositórios
+  const reposHtml = `
+    <div class="github-repos">
+      ${repos
+        .map(
+          (repo) => `
+        <div class="repo-card">
+          <div class="repo-header">
+            <a href="${repo.html_url}" target="_blank" class="repo-name">
+              <i class="fas fa-code-branch"></i> ${repo.name}
+            </a>
+            <span class="repo-visibility">${
+              repo.private ? "Privado" : "Público"
+            }</span>
+          </div>
+          <p class="repo-description">${
+            repo.description || "Sem descrição disponível"
+          }</p>
+          <div class="repo-meta">
+            <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+            <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
+            <span><i class="fas fa-history"></i> ${new Date(
+              repo.updated_at
+            ).toLocaleDateString()}</span>
+          </div>
+          ${
+            repo.language
+              ? `
+            <div class="repo-languages">
+              <span class="language-tag">
+                <span class="language-color" style="background-color: ${getLanguageColor(
+                  repo.language
+                )}"></span>
+                ${repo.language}
+              </span>
+            </div>
+          `
+              : ""
+          }
+        </div>
+      `
+        )
+        .join("")}
+    </div>
+  `;
+
+  // Inserir conteúdo
+  githubContainerEl.innerHTML = `
+    <div class="github-header">
+      <h2 class="section-title" data-subtitle="Contribuições Open Source">Meu GitHub</h2>
+    </div>
+    ${overviewHtml}
+    ${reposHtml}
+  `;
+}
+
+// Função auxiliar para cores das linguagens
+function getLanguageColor(language) {
+  const colors = {
+    JavaScript: "#f1e05a",
+    Python: "#3572A5",
+    PHP: "#4F5D95",
+    HTML: "#e34c26",
+    CSS: "#563d7c",
+    TypeScript: "#2b7489",
+    Java: "#b07219",
+    "C++": "#f34b7d",
+    Ruby: "#701516",
+    // Adicione mais cores conforme necessário
+  };
+  return colors[language] || "#8b8b8b";
+}

@@ -984,7 +984,8 @@ section + section {
 .about-section {
   padding: 8rem 0;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden; /* Adicionado para evitar overflow horizontal */
+  width: 100%;
   background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
 }
 
@@ -995,8 +996,7 @@ section + section {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 4rem;
-  align-items: center;
-  position: relative;
+  align-items: start; /* Alterado para melhor alinhamento */
 }
 
 .about-content {
@@ -2191,6 +2191,478 @@ section + section {
 
     .contact-item::after {
         display: none;
+    }
+}
+
+/* ...existing code... */
+
+.profile-section {
+    position: sticky; /* Mantém o perfil visível durante scroll */
+    top: 2rem;
+    height: auto; /* Altura automática ao invés de 100% */
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.profile-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-images {
+    position: relative;
+    height: auto; /* Altura automática */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    position: relative; /* Alterado de absolute para relative */
+    width: 100% !important;
+    height: 300px !important;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.05);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.profile-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #f0f9ff;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.profile-badge:hover {
+    background: var(--gradient);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.profile-badge i {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-section {
+        position: relative;
+        top: 0;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .profile-images {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .profile-image {
+        position: static;
+        width: 100% !important;
+        height: 300px !important;
+        transform: none !important;
+    }
+
+    .profile-image:last-child {
+        transform: none !important;
+    }
+
+    .profile-stats {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas menores */
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .profile-badges {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tech-stack {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .tech-category {
+        padding: 1rem;
+    }
+
+    .about-content {
+        overflow-x: hidden; /* Previne overflow horizontal */
+        width: 100%;
+    }
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.github-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+}
+
+.github-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.github-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.github-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.github-stat {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.github-stat:hover {
+    transform: translateY(-5px);
+}
+
+.github-stat i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.github-stat .stat-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.github-stat .stat-label {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.github-repos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.github-repo {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    transition: all 0.3s ease;
+}
+
+.github-repo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+.github-repo h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.github-repo h4 i {
+    color: var(--primary-color);
+}
+
+.github-repo h4 a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.github-repo h4 a:hover {
+    color: var(--primary-color);
+}
+
+.github-repo p {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.repo-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.repo-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.repo-meta i {
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .github-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .github-repos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ...existing code... */
+
+.github-overview {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+.github-profile {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+
+.github-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+}
+
+.github-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.github-info p {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.github-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.contribution-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+
+.contribution-graph {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.github-repos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.repo-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.repo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+.repo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.repo-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.repo-name:hover {
+    text-decoration: underline;
+}
+
+.repo-visibility {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    background: #f0f9ff;
+    color: var(--primary-color);
+}
+
+.repo-description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.repo-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.repo-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.repo-languages {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.language-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.language-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .github-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .github-profile {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .github-stats {
+        justify-content: center;
     }
 }
 
